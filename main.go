@@ -13,8 +13,9 @@ var (
 // jwtService     service.JWTService     = service.NewJWTService()
 // userService    service.UserService    = service.NewUserService(userRepo)
 // productService service.ProductService = service.NewProductService(productRepo)
-// authHandler    v1.AuthHandler         = v1.NewAuthHandler(authService, jwtService, userService)
-// userHandler    v1.UserHandler         = v1.NewUserHandler(userService, jwtService)
+// authHandler v1.AuthHandler = v1.NewAuthHandler(authService, jwtService, userService)
+// userHandler v1.UserHandler = v1.NewUserHandler(userService, jwtService)
+
 // productHandler v1.ProductHandler      = v1.NewProductHandler(productService, jwtService)
 )
 
@@ -46,6 +47,7 @@ func main() {
 	checkRoutes := server.Group("api/check")
 	{
 		checkRoutes.GET("health", v1.Health)
+		checkRoutes.GET("address/:address", v1.Address)
 	}
 
 	server.Run()
