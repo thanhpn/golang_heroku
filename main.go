@@ -32,10 +32,7 @@ func main() {
 		AllowHeaders:     []string{"Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization", "accept", "origin", "Cache-Control", "X-Requested-With"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
-		AllowOriginFunc: func(origin string) bool {
-			return origin == "https://github.com"
-		},
-		MaxAge: 12 * time.Hour,
+		MaxAge:           12 * time.Hour,
 	}))
 
 	// authRoutes := server.Group("api/auth")
