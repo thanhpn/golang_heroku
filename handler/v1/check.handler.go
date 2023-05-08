@@ -1,14 +1,12 @@
 package v1
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 
-	"github.com/ethereum/go-ethereum/log"
 	"github.com/gin-gonic/gin"
 )
 
@@ -76,20 +74,20 @@ func Address(ctx *gin.Context) {
 }
 
 func TotalSupply(ctx *gin.Context) {
-	file, err := os.Open("address.txt")
+	// file, err := os.Open("address.txt")
 
-	if err != nil {
-		log.Error("failed to open file: %s", err)
-	}
+	// if err != nil {
+	// 	log.Error("failed to open file: %s", err)
+	// }
 
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-	var addressLines []string
-	for scanner.Scan() {
-		addressLines = append(addressLines, scanner.Text())
-	}
-	file.Close()
-	for _, addressLine := range addressLines {
-		fmt.Println(addressLine)
-	}
+	// scanner := bufio.NewScanner(file)
+	// scanner.Split(bufio.ScanLines)
+	// var addressLines []string
+	// for scanner.Scan() {
+	// 	addressLines = append(addressLines, scanner.Text())
+	// }
+	// file.Close()
+	// for _, addressLine := range addressLines {
+	// 	fmt.Println(addressLine)
+	// }
 }

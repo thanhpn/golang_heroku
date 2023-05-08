@@ -60,7 +60,7 @@ func main() {
 	{
 		checkRoutes.GET("health", v1.Health)
 		checkRoutes.GET("address/:address", v1.Address)
-		checkRoutes.GET("airdrop", v1.TotalSupply)
+		// checkRoutes.GET("airdrop", v1.TotalSupply)
 	}
 
 	server.Run()
