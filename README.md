@@ -348,3 +348,5 @@ Response success (Status: 200)
     "data": {}
 }
 ```
+
+```Go run main.go```

@@ -1,12 +1,14 @@
 package v1
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 
+	"github.com/ethereum/go-ethereum/log"
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,7 +29,8 @@ func Health(ctx *gin.Context) {
 func Address(ctx *gin.Context) {
 	address := ctx.Param("address")
 
-	requestURL := fmt.Sprintf("https://arbitrum.foundation/_next/data/2XJ2CtZPMld7VY_3hy2hr/eligibility.json?address=%v", address)
+	requestURL := fmt.Sprintf("https://arbitrum.foundation/_next/data/VWLNq01bj-AZOQfr4qoiL/eligibility.json?address=%v", address)
+	// requestURL := fmt.Sprintf("https://arbitrum.foundation/_next/data/2XJ2CtZPMld7VY_3hy2hr/eligibility.json?address=%v", address)
 	fmt.Printf("requestURL\n" + requestURL)
 	req, err := http.NewRequest(http.MethodGet, requestURL, nil)
 	if err != nil {
@@ -70,4 +73,23 @@ func Address(ctx *gin.Context) {
 		"isEligible": fmt.Sprintf("%v", detail.PageProps.IsEligible),
 	}
 	ctx.JSON(http.StatusOK, response)
+}
+
+func TotalSupply(ctx *gin.Context) {
+	file, err := os.Open("address.txt")
+
+	if err != nil {
+		log.Error("failed to open file: %s", err)
+	}
+
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	var addressLines []string
+	for scanner.Scan() {
+		addressLines = append(addressLines, scanner.Text())
+	}
+	file.Close()
+	for _, addressLine := range addressLines {
+		fmt.Println(addressLine)
+	}
 }
